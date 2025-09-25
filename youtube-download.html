@@ -1128,167 +1128,176 @@
                 return videoId !== false;
             }
             
-            // Function to show loading state
-            function showLoading() {
-                loadingSpinner.style.display = 'block';
-                errorMessage.style.display = 'none';
-                downloadOptions.style.display = 'none';
-                urlSubmit.disabled = true;
-                urlSubmit.textContent = 'Processing...';
-            }
-            
-            // Function to hide loading state
-            function hideLoading() {
-                loadingSpinner.style.display = 'none';
-                urlSubmit.disabled = false;
-                urlSubmit.textContent = 'Download';
-            }
-            
-            // Function to show error message
-            function showError() {
-                hideLoading();
-                errorMessage.style.display = 'block';
-                downloadOptions.style.display = 'none';
-            }
-            
-            // Function to show download options
-            function showDownloadOptions(data) {
-                hideLoading();
-                videoData = data;
+            // Function to fetch video information
+            async function fetchVideoInfo(url) {
+                const videoId = getYouTubeVideoId(url);
                 
-                // Set video info
-                videoThumbnail.src = data.thumbnail;
-                videoTitle.textContent = data.title;
-                videoDetails.textContent = `${data.channel} • ${data.duration}`;
+                if (!videoId) {
+                    throw new Error('Invalid YouTube URL');
+                }
                 
-                // Clear previous quality options
+                // In a real implementation, this would call a backend API
+                // For demonstration, we'll simulate the API response
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate API response with mock data
+                        const mockData = {
+                            success: true,
+                            videoId: videoId,
+                            title: 'Sample YouTube Video Title',
+                            channel: 'Sample Channel',
+                            duration: '10:30',
+                            thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                            formats: [
+                                { type: 'Video', quality: '1080p', format: 'MP4', size: '125 MB' },
+                                { type: 'Video', quality: '720p', format: 'MP4', size: '85 MB' },
+                                { type: 'Video', quality: '480p', format: 'MP4', size: '45 MB' },
+                                { type: 'Video', quality: '360p', format: 'MP4', size: '25 MB' },
+                                { type: 'Audio', quality: '128kbps', format: 'MP3', size: '12 MB' },
+                                { type: 'Audio', quality: '64kbps', format: 'MP3', size: '6 MB' }
+                            ]
+                        };
+                        
+                        // Simulate occasional errors
+                        if (Math.random() < 0.1) { // 10% chance of error for demo
+                            reject(new Error('Failed to fetch video information'));
+                        } else {
+                            resolve(mockData);
+                        }
+                    }, 1500);
+                });
+            }
+            
+            // Function to handle URL submission
+            urlSubmit.addEventListener('click', async function() {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    showError('Please enter a YouTube URL');
+                    return;
+                }
+                
+                if (!isValidYouTubeUrl(url)) {
+                    showError('Please enter a valid YouTube URL');
+                    return;
+                }
+                
+                // Hide error and download options
+                hideError();
+                hideDownloadOptions();
+                
+                // Show loading spinner
+                showLoading();
+                
+                try {
+                    videoData = await fetchVideoInfo(url);
+                    
+                    // Hide loading spinner
+                    hideLoading();
+                    
+                    // Populate video info
+                    videoThumbnail.src = videoData.thumbnail;
+                    videoThumbnail.alt = videoData.title;
+                    videoTitle.textContent = videoData.title;
+                    videoDetails.textContent = `${videoData.channel} • ${videoData.duration}`;
+                    
+                    // Populate quality options
+                    populateQualityOptions(videoData.formats);
+                    
+                    // Show download options
+                    showDownloadOptions();
+                } catch (error) {
+                    hideLoading();
+                    showError(error.message || 'Failed to process the YouTube URL');
+                }
+            });
+            
+            // Function to populate quality options
+            function populateQualityOptions(formats) {
                 qualityOptions.innerHTML = '';
                 
-                // Add quality options
-                data.qualities.forEach(quality => {
-                    const qualityOption = document.createElement('div');
-                    qualityOption.className = 'quality-option';
-                    qualityOption.innerHTML = `
+                formats.forEach((format, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'quality-option';
+                    optionElement.dataset.index = index;
+                    
+                    optionElement.innerHTML = `
                         <div class="quality-header">
-                            <span class="quality-type">${quality.type}</span>
-                            <span class="quality-size">${quality.size}</span>
+                            <span class="quality-type">${format.type}</span>
+                            <span class="quality-size">${format.size}</span>
                         </div>
-                        <div class="quality-resolution">${quality.resolution}</div>
+                        <div class="quality-resolution">${format.quality} ${format.format}</div>
                     `;
                     
-                    qualityOption.addEventListener('click', () => {
+                    optionElement.addEventListener('click', function() {
                         // Remove selected class from all options
                         document.querySelectorAll('.quality-option').forEach(opt => {
                             opt.classList.remove('selected');
                         });
                         
                         // Add selected class to clicked option
-                        qualityOption.classList.add('selected');
-                        selectedQuality = quality;
+                        this.classList.add('selected');
+                        
+                        // Enable download button
+                        selectedQuality = format;
                         downloadBtn.disabled = false;
                     });
                     
-                    qualityOptions.appendChild(qualityOption);
+                    qualityOptions.appendChild(optionElement);
                 });
+            }
+            
+            // Function to handle download button click
+            downloadBtn.addEventListener('click', function() {
+                if (!selectedQuality || !videoData) return;
                 
-                // Show download options
+                // In a real implementation, this would initiate the download
+                // For demonstration, we'll simulate the download process
+                alert(`Downloading: ${videoData.title}\nQuality: ${selectedQuality.quality} ${selectedQuality.format}\nSize: ${selectedQuality.size}\n\nIn a real implementation, the download would start now.`);
+                
+                // Reset for next download
+                resetDownloadForm();
+            });
+            
+            // Helper functions for UI state management
+            function showLoading() {
+                loadingSpinner.style.display = 'block';
+            }
+            
+            function hideLoading() {
+                loadingSpinner.style.display = 'none';
+            }
+            
+            function showError(message) {
+                errorMessage.querySelector('p').textContent = message;
+                errorMessage.style.display = 'block';
+            }
+            
+            function hideError() {
+                errorMessage.style.display = 'none';
+            }
+            
+            function showDownloadOptions() {
                 downloadOptions.style.display = 'block';
             }
             
-            // Function to simulate video data retrieval
-            function getVideoData(videoId) {
-                // In a real implementation, this would make an API call to a backend service
-                // For demonstration, we're using mock data
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        // Simulate occasional error
-                        if (Math.random() < 0.1) {
-                            reject(new Error('Video not found or unavailable'));
-                            return;
-                        }
-                        
-                        // Mock video data
-                        const mockData = {
-                            videoId: videoId,
-                            title: 'Sample YouTube Video Title',
-                            channel: 'Sample Channel',
-                            duration: '10:30',
-                            thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-                            qualities: [
-                                { type: 'MP4 Video', resolution: '1080p', size: '125 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '720p', size: '85 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '480p', size: '45 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '360p', size: '25 MB', url: '#' },
-                                { type: 'MP3 Audio', resolution: '128 kbps', size: '8 MB', url: '#' },
-                                { type: 'MP3 Audio', resolution: '192 kbps', size: '12 MB', url: '#' }
-                            ]
-                        };
-                        
-                        resolve(mockData);
-                    }, 1500); // Simulate API delay
-                });
+            function hideDownloadOptions() {
+                downloadOptions.style.display = 'none';
             }
             
-            // Function to initiate download
-            function initiateDownload() {
-                if (!selectedQuality) return;
-                
-                // In a real implementation, this would redirect to the actual download URL
-                // For demonstration, we're showing an alert
-                alert(`Downloading: ${videoData.title}\nQuality: ${selectedQuality.resolution}\nFormat: ${selectedQuality.type}`);
-                
-                // Simulate download process
+            function resetDownloadForm() {
+                urlInput.value = '';
+                hideDownloadOptions();
+                selectedQuality = null;
+                videoData = null;
                 downloadBtn.disabled = true;
-                downloadBtn.textContent = 'Downloading...';
-                
-                setTimeout(() => {
-                    downloadBtn.disabled = false;
-                    downloadBtn.textContent = 'Download';
-                    alert('Download completed successfully!');
-                }, 2000);
             }
             
-            // Event listener for URL submission
-            urlSubmit.addEventListener('click', () => {
-                const url = urlInput.value.trim();
-                
-                if (!url) {
-                    alert('Please enter a YouTube URL');
-                    return;
-                }
-                
-                if (!isValidYouTubeUrl(url)) {
-                    alert('Please enter a valid YouTube URL');
-                    return;
-                }
-                
-                const videoId = getYouTubeVideoId(url);
-                
-                showLoading();
-                
-                getVideoData(videoId)
-                    .then(data => {
-                        showDownloadOptions(data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showError();
-                    });
-            });
-            
-            // Event listener for Enter key in URL input
-            urlInput.addEventListener('keypress', (e) => {
+            // Allow Enter key to submit URL
+            urlInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     urlSubmit.click();
                 }
-            });
-            
-            // Event listener for download button
-            downloadBtn.addEventListener('click', initiateDownload);
-            
-            // Event listener for CTA button
-            document.querySelector('.cta-button.white').addEventListener('click', () => {
-                urlInput.focus();
             });
         });
     </script>
