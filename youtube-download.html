@@ -171,3 +171,741 @@
             overflow: hidden;
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
         }
+        
+        .youtube-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .youtube-hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .youtube-hero h1 i {
+            color: var(--youtube-red);
+        }
+        
+        .youtube-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #e2e8f0;
+        }
+        
+        /* Download Form */
+        .download-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .url-input-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .url-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .url-submit {
+            background: var(--youtube-red);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            padding: 0 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .url-submit:hover {
+            background: #CC0000;
+        }
+        
+        .form-note {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            text-align: center;
+        }
+        
+        .form-note a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background-color: var(--neutral-bg);
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-heading h2 {
+            font-size: 2.5rem;
+            color: var(--text-heading);
+            margin-bottom: 15px;
+        }
+        
+        .section-heading p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-body);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--youtube-red);
+        }
+        
+        .feature-name {
+            font-weight: 600;
+            color: var(--text-heading);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 100px;
+            right: 100px;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--text-heading);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--neutral-bg);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            background: var(--white);
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f0f4f8;
+        }
+        
+        .faq-answer {
+            background: var(--white);
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--youtube-red), #CC0000);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button.white {
+            background-color: white;
+            color: var(--youtube-red);
+        }
+        
+        .cta-button.white:hover {
+            background-color: var(--neutral-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-heading);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #CBD5E1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-icons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-icons-grid a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        .social-icons-grid a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .social-icons-grid a.fb:hover {
+            background-color: #4267B2;
+        }
+        
+        .social-icons-grid a.ig:hover {
+            background-color: #E1306C;
+        }
+        
+        .social-icons-grid a.li:hover {
+            background-color: #0A66C2;
+        }
+        
+        .social-icons-grid a.x:hover {
+            background-color: #000000;
+        }
+        
+        .social-icons-grid a.tt:hover {
+            background-color: #000000;
+        }
+        
+        .social-icons-grid a.pin:hover {
+            background-color: #E60023;
+        }
+        
+        .social-icons-grid a.rd:hover {
+            background-color: #FF4500;
+        }
+        
+        .social-icons-grid a.yt:hover {
+            background-color: #FF0000;
+        }
+        
+        .social-icons-grid a.tg:hover {
+            background-color: #2AABEE;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #CBD5E1;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .youtube-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .url-input-container {
+                flex-direction: column;
+            }
+            
+            .url-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .url-submit {
+                border-radius: 30px;
+                padding: 15px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .steps-container::before {
+                display: none;
+            }
+            
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-icons-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-cloud-download-alt"></i>
+                AllGrab
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="#">Download <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown">
+                            <a href="youtube-download.html">YouTube</a>
+                            <a href="tiktok-download.html">TikTok</a>
+                            <a href="instagram-download.html">Instagram</a>
+                            <a href="facebook-download.html">Facebook</a>
+                            <a href="twitter-download.html">Twitter</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">Video Tools <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown">
+                            <a href="convert-mp3.html">Convert to MP3</a>
+                            <a href="change-formats.html">Change Formats</a>
+                            <a href="compress-resize.html">Compress & Resize</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <a href="#" class="blog-button">Blog</a>
+        </div>
+    </header>
+
+    <!-- YouTube Hero Section -->
+    <section class="youtube-hero">
+        <div class="container youtube-hero-content">
+            <h1><i class="fab fa-youtube"></i> YouTube Video Downloader</h1>
+            <p>Download any YouTube video in HD quality or extract MP3 audio. Fast, free, and no registration required.</p>
+            
+            <div class="download-form">
+                <div class="url-input-container">
+                    <input type="text" class="url-input" placeholder="Paste YouTube URL here...">
+                    <button class="url-submit">Download</button>
+                </div>
+                <p class="form-note">By using our service you accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Why Use Our YouTube Downloader?</h2>
+                <p>We offer the best YouTube downloading experience with these powerful features</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <div class="feature-name">Multiple Formats</div>
+                    <p>Download in MP4, WEBM, 3GP and other formats. Choose from 360p to 4K quality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="feature-name">MP3 Audio Extraction</div>
+                    <p>Extract high-quality MP3 audio from any YouTube video with one click.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-name">Fast Downloads</div>
+                    <p>Our optimized servers ensure the fastest download speeds possible.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-name">100% Safe</div>
+                    <p>No malware, no viruses. Your privacy and security are our top priority.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="feature-name">No Limits</div>
+                    <p>Download as many videos as you want. No registration or subscription required.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-name">Mobile Friendly</div>
+                    <p>Works perfectly on all devices - desktop, tablet, and mobile phones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-heading">
+                <h2>How to Download YouTube Videos</h2>
+                <p>It only takes three simple steps to download any YouTube video</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Copy YouTube URL</div>
+                    <p>Go to YouTube and copy the URL of the video you want to download.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Paste URL</div>
+                    <p>Paste the YouTube URL into the download box on our website.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Download</div>
+                    <p>Choose your preferred format and quality, then click download.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about downloading YouTube videos</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is it legal to download YouTube videos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Downloading YouTube videos for personal use is generally acceptable, but distributing copyrighted content without permission is illegal. Always respect copyright laws and use downloaded content responsibly.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What video qualities are available?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We support all YouTube video qualities from 144p to 4K, depending on what's available for the specific video. You can choose your preferred quality before downloading.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I download YouTube videos on mobile?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our YouTube downloader works on all devices including smartphones and tablets. The process is exactly the same - just paste the YouTube URL and download.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does it take to download a video?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Download speed depends on your internet connection and video size. Most videos download in just a few seconds to a couple of minutes.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need to install any software?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No software installation is required. Our YouTube downloader works directly in your web browser on any operating system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Download YouTube Videos?</h2>
+            <p>Join millions of users who trust our YouTube downloader every day</p>
+            <button class="cta-button white">Start Downloading Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Features & USP</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">DMCA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">PDF Tips</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <div class="social-icons-grid">
+                        <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="ig"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="li"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="x"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="tt"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="pin"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="rd"><i class="fab fa-reddit-alien"></i></a>
+                        <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="tg"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 AllGrab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
