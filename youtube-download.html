@@ -815,10 +815,12 @@
             <p>Download any YouTube video in HD quality or extract MP3 audio. Fast, free, and no registration required.</p>
             
             <div class="download-form">
-                <div class="url-input-container">
-                    <input type="text" class="url-input" placeholder="Paste YouTube URL here...">
-                    <button class="url-submit">Download</button>
-                </div>
+                <form id="download-form" method="post">
+                    <div class="url-input-container">
+                        <input type="text" class="url-input" name="url" placeholder="Paste YouTube URL here..." required>
+                        <button type="submit" class="url-submit">Download</button>
+                    </div>
+                </form>
                 <p class="form-note">By using our service you accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
                 
                 <!-- Loading Spinner -->
@@ -1111,6 +1113,7 @@
             const videoThumbnail = document.querySelector('.video-thumbnail');
             const videoTitle = document.querySelector('.video-details h3');
             const videoDetails = document.querySelector('.video-details p');
+            const downloadForm = document.getElementById('download-form');
             
             let selectedQuality = null;
             let videoData = null;
@@ -1144,11 +1147,10 @@
                 urlSubmit.textContent = 'Download';
             }
             
-            // Function to show error message
+            // Function to show error
             function showError() {
                 hideLoading();
                 errorMessage.style.display = 'block';
-                downloadOptions.style.display = 'none';
             }
             
             // Function to show download options
@@ -1165,27 +1167,31 @@
                 qualityOptions.innerHTML = '';
                 
                 // Add quality options
-                data.qualities.forEach(quality => {
+                data.qualities.forEach((quality, index) => {
                     const qualityOption = document.createElement('div');
                     qualityOption.className = 'quality-option';
                     qualityOption.innerHTML = `
                         <div class="quality-header">
-                            <span class="quality-type">${quality.type}</span>
-                            <span class="quality-size">${quality.size}</span>
+                            <div class="quality-type">${quality.type}</div>
+                            <div class="quality-size">${quality.size}</div>
                         </div>
                         <div class="quality-resolution">${quality.resolution}</div>
                     `;
                     
                     qualityOption.addEventListener('click', () => {
                         // Remove selected class from all options
-                        document.querySelectorAll('.quality-option').forEach(opt => {
-                            opt.classList.remove('selected');
+                        document.querySelectorAll('.quality-option').forEach(option => {
+                            option.classList.remove('selected');
                         });
                         
                         // Add selected class to clicked option
                         qualityOption.classList.add('selected');
-                        selectedQuality = quality;
+                        
+                        // Enable download button
                         downloadBtn.disabled = false;
+                        
+                        // Set selected quality
+                        selectedQuality = index;
                     });
                     
                     qualityOptions.appendChild(qualityOption);
@@ -1195,61 +1201,43 @@
                 downloadOptions.style.display = 'block';
             }
             
-            // Function to simulate video data retrieval
-            function getVideoData(videoId) {
-                // In a real implementation, this would make an API call to a backend service
-                // For demonstration, we're using mock data
+            // Function to simulate fetching video info (in a real app, this would be a server request)
+            function fetchVideoInfo(url) {
                 return new Promise((resolve, reject) => {
+                    // Simulate API call delay
                     setTimeout(() => {
-                        // Simulate occasional error
-                        if (Math.random() < 0.1) {
-                            reject(new Error('Video not found or unavailable'));
+                        const videoId = getYouTubeVideoId(url);
+                        
+                        if (!videoId) {
+                            reject(new Error('Invalid YouTube URL'));
                             return;
                         }
                         
-                        // Mock video data
+                        // Mock video data (in a real app, this would come from your backend)
                         const mockData = {
-                            videoId: videoId,
                             title: 'Sample YouTube Video Title',
                             channel: 'Sample Channel',
                             duration: '10:30',
                             thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
                             qualities: [
-                                { type: 'MP4 Video', resolution: '1080p', size: '125 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '720p', size: '85 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '480p', size: '45 MB', url: '#' },
-                                { type: 'MP4 Video', resolution: '360p', size: '25 MB', url: '#' },
-                                { type: 'MP3 Audio', resolution: '128 kbps', size: '8 MB', url: '#' },
-                                { type: 'MP3 Audio', resolution: '192 kbps', size: '12 MB', url: '#' }
+                                { type: 'MP4 Video', resolution: '1080p HD', size: '45.2 MB' },
+                                { type: 'MP4 Video', resolution: '720p HD', size: '28.7 MB' },
+                                { type: 'MP4 Video', resolution: '480p', size: '15.3 MB' },
+                                { type: 'MP4 Video', resolution: '360p', size: '9.8 MB' },
+                                { type: 'MP3 Audio', resolution: '128 kbps', size: '8.4 MB' },
+                                { type: 'MP3 Audio', resolution: '192 kbps', size: '12.6 MB' }
                             ]
                         };
                         
                         resolve(mockData);
-                    }, 1500); // Simulate API delay
+                    }, 1500);
                 });
             }
             
-            // Function to initiate download
-            function initiateDownload() {
-                if (!selectedQuality) return;
+            // Form submission handler
+            downloadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // In a real implementation, this would redirect to the actual download URL
-                // For demonstration, we're showing an alert
-                alert(`Downloading: ${videoData.title}\nQuality: ${selectedQuality.resolution}\nFormat: ${selectedQuality.type}`);
-                
-                // Simulate download process
-                downloadBtn.disabled = true;
-                downloadBtn.textContent = 'Downloading...';
-                
-                setTimeout(() => {
-                    downloadBtn.disabled = false;
-                    downloadBtn.textContent = 'Download';
-                    alert('Download completed successfully!');
-                }, 2000);
-            }
-            
-            // Event listener for URL submission
-            urlSubmit.addEventListener('click', () => {
                 const url = urlInput.value.trim();
                 
                 if (!url) {
@@ -1262,11 +1250,10 @@
                     return;
                 }
                 
-                const videoId = getYouTubeVideoId(url);
-                
                 showLoading();
                 
-                getVideoData(videoId)
+                // Fetch video info (simulated)
+                fetchVideoInfo(url)
                     .then(data => {
                         showDownloadOptions(data);
                     })
@@ -1276,19 +1263,28 @@
                     });
             });
             
-            // Event listener for Enter key in URL input
-            urlInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    urlSubmit.click();
+            // Download button handler
+            downloadBtn.addEventListener('click', function() {
+                if (selectedQuality === null) {
+                    alert('Please select a quality option');
+                    return;
                 }
-            });
-            
-            // Event listener for download button
-            downloadBtn.addEventListener('click', initiateDownload);
-            
-            // Event listener for CTA button
-            document.querySelector('.cta-button.white').addEventListener('click', () => {
-                urlInput.focus();
+                
+                if (!videoData) {
+                    alert('No video data available');
+                    return;
+                }
+                
+                // In a real implementation, this would trigger the actual download
+                // For this demo, we'll simulate a download
+                const selectedOption = videoData.qualities[selectedQuality];
+                alert(`Starting download: ${selectedOption.type} - ${selectedOption.resolution}`);
+                
+                // Reset form for next download
+                downloadOptions.style.display = 'none';
+                urlInput.value = '';
+                selectedQuality = null;
+                downloadBtn.disabled = true;
             });
         });
     </script>
