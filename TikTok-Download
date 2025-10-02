@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download TikTok Videos | Free TikTok Downloader - AllGrab</title>
+    <title>TikTok Video Downloader | Free TikTok Downloader - AllGrab</title>
     <meta name="description" content="Free TikTok video downloader. Download TikTok videos in HD quality, extract MP3 audio from TikTok. Fast, secure, and 100% free.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -16,7 +16,8 @@
             --white: #FFFFFF;
             --text-body: #1F2937;
             --text-heading: #111827;
-            --youtube-red: #FF0000;
+            --tiktok-pink: #FF0050;
+            --tiktok-black: #000000;
         }
         
         * {
@@ -164,7 +165,7 @@
         }
         
         /* TikTok Hero Section */
-        .youtube-hero {
+        .tiktok-hero {
             padding: 150px 0 80px;
             text-align: center;
             position: relative;
@@ -172,12 +173,12 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
         }
         
-        .youtube-hero-content {
+        .tiktok-hero-content {
             position: relative;
             z-index: 2;
         }
         
-        .youtube-hero h1 {
+        .tiktok-hero h1 {
             font-size: 3rem;
             color: white;
             margin-bottom: 20px;
@@ -185,11 +186,11 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
-        .youtube-hero h1 i {
-            color: var(--youtube-red);
+        .tiktok-hero h1 i {
+            color: var(--tiktok-pink);
         }
         
-        .youtube-hero p {
+        .tiktok-hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 30px;
@@ -222,7 +223,7 @@
         }
         
         .url-submit {
-            background: var(--youtube-red);
+            background: var(--tiktok-pink);
             color: white;
             border: none;
             border-radius: 0 30px 30px 0;
@@ -245,6 +246,50 @@
         .form-note a {
             color: white;
             text-decoration: underline;
+        }
+        
+        /* Result Container */
+        #tiktok-result {
+            margin-top: 20px;
+        }
+        
+        .result-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            margin-top: 20px;
+        }
+        
+        .demo-download-btn {
+            background: linear-gradient(135deg, var(--tiktok-pink), var(--tiktok-pink));
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .demo-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 80, 0.4);
+        }
+        
+        .demo-download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
         
         /* Features Section */
@@ -294,7 +339,7 @@
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 20px;
-            color: var(--youtube-red);
+            color: var(--tiktok-pink);
         }
         
         .feature-name {
@@ -410,7 +455,7 @@
         
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, var(--youtube-red), #CC0000);
+            background: linear-gradient(135deg, var(--tiktok-pink), #CC0000);
             padding: 80px 0;
             text-align: center;
             color: white;
@@ -555,6 +600,22 @@
             font-size: 0.9rem;
         }
         
+        /* Loading Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--tiktok-pink);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
         /* Responsive Styles */
         @media (max-width: 992px) {
             .features-grid {
@@ -578,7 +639,7 @@
                 justify-content: center;
             }
             
-            .youtube-hero h1 {
+            .tiktok-hero h1 {
                 font-size: 2.2rem;
             }
             
@@ -615,6 +676,10 @@
             
             .cta-section p {
                 font-size: 1.5rem;
+            }
+            
+            .download-options {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -671,16 +736,17 @@
     </header>
 
     <!-- TikTok Hero Section -->
-    <section class="youtube-hero">
-        <div class="container youtube-hero-content">
-            <h1><i class="fab fa-youtube"></i> TikTok Video Downloader Downloader</h1>
+    <section class="tiktok-hero">
+        <div class="container tiktok-hero-content">
+            <h1><i class="fab fa-tiktok"></i> TikTok Video Downloader</h1>
             <p>Download any TikTok video in HD quality or extract MP3 audio. Fast, free, and no registration required.</p>
             
             <div class="download-form">
                 <div class="url-input-container">
-                    <input type="text" class="url-input" placeholder="Paste TikTok URL here...">
-                    <button class="url-submit">Download</button>
+                    <input type="text" class="url-input" id="tiktok-url-input" placeholder="Paste TikTok URL here...">
+                    <button class="url-submit" id="tiktok-download-btn">Download</button>
                 </div>
+                <div id="tiktok-result"></div>
                 <p class="form-note">By using our service you accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
             </div>
         </div>
@@ -911,8 +977,13 @@
     </footer>
 
     <script>
-        // FAQ Accordion Functionality
+        // TikTok Downloader Functionality
         document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.getElementById('tiktok-download-btn');
+            const urlInput = document.getElementById('tiktok-url-input');
+            const resultDiv = document.getElementById('tiktok-result');
+            
+            // FAQ Accordion Functionality
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
@@ -929,6 +1000,148 @@
                     // Toggle current item
                     item.classList.toggle('active');
                 });
+            });
+
+            downloadBtn.addEventListener('click', function() {
+                const tiktokUrl = urlInput.value.trim();
+                
+                if (!tiktokUrl) {
+                    showError('Please enter a TikTok URL');
+                    return;
+                }
+
+                if (!isValidTikTokUrl(tiktokUrl)) {
+                    showError('Please enter a valid TikTok URL (e.g., https://vm.tiktok.com/..., https://www.tiktok.com/@username/video/...)');
+                    return;
+                }
+
+                // Show loading state
+                resultDiv.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <div class="loading-spinner"></div>
+                        <p style="margin-top: 10px;">Processing TikTok video...</p>
+                    </div>
+                `;
+
+                // Simulate processing (since we can't actually download without backend)
+                setTimeout(() => {
+                    showDemoResult(tiktokUrl);
+                }, 2000);
+            });
+
+            function isValidTikTokUrl(url) {
+                const tiktokPatterns = [
+                    /https?:\/\/(www\.)?tiktok\.com\/.+/,
+                    /https?:\/\/(vm\.|vt\.)tiktok\.com\/.+/,
+                    /https?:\/\/tiktok\.com\/@.+\/video\/.+/,
+                    /https?:\/\/www\.tiktok\.com\/@.+\/video\/.+/
+                ];
+                return tiktokPatterns.some(pattern => pattern.test(url));
+            }
+
+            function showDemoResult(url) {
+                // Extract username and video ID for demo purposes
+                const username = extractUsername(url) || 'tiktokuser';
+                const videoId = extractVideoId(url) || '123456789';
+                
+                resultDiv.innerHTML = `
+                    <div class="result-card">
+                        <h3 style="color: var(--tiktok-pink); margin-bottom: 15px;">🎬 TikTok Video Ready</h3>
+                        
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <p><strong>Demo Mode Active</strong></p>
+                            <p style="font-size: 14px; color: #666;">This is a frontend demo. A real implementation would download the actual video.</p>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <h4>📄 Video Information:</h4>
+                            <p><strong>URL:</strong> ${url}</p>
+                            <p><strong>Username:</strong> @${username}</p>
+                            <p><strong>Video ID:</strong> ${videoId}</p>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <h4>⬇️ Download Options:</h4>
+                            <div class="download-options">
+                                <button class="demo-download-btn" data-quality="hd">📹 Download HD Video (MP4)</button>
+                                <button class="demo-download-btn" data-quality="sd">📹 Download SD Video (MP4)</button>
+                                <button class="demo-download-btn" data-quality="mp3">🎵 Download MP3 Audio</button>
+                            </div>
+                        </div>
+
+                        <div style="background: #fff3cd; padding: 10px; border-radius: 5px; border-left: 4px solid #ffc107;">
+                            <p style="margin: 0; font-size: 14px; color: #856404;">
+                                <strong>Note:</strong> This is a demonstration. Actual download functionality requires a backend service.
+                            </p>
+                        </div>
+                    </div>
+                `;
+
+                // Add click handlers for demo buttons
+                document.querySelectorAll('.demo-download-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const quality = this.getAttribute('data-quality');
+                        showDownloadMessage(quality, username, videoId);
+                    });
+                });
+            }
+
+            function extractUsername(url) {
+                const match = url.match(/tiktok\.com\/@([^\/]+)/);
+                return match ? match[1] : null;
+            }
+
+            function extractVideoId(url) {
+                const match = url.match(/video\/(\d+)/) || url.match(/\/(\d{15,})/);
+                return match ? match[1] : null;
+            }
+
+            function showDownloadMessage(quality, username, videoId) {
+                const messages = {
+                    hd: `HD Video download started for @${username}'s video`,
+                    sd: `SD Video download started for @${username}'s video`, 
+                    mp3: `MP3 Audio extraction started for @${username}'s video`
+                };
+                
+                // Show a temporary success message
+                const originalContent = resultDiv.innerHTML;
+                resultDiv.innerHTML = `
+                    <div class="result-card">
+                        <div style="text-align: center; padding: 20px;">
+                            <div style="font-size: 3rem; color: #10B981; margin-bottom: 15px;">✓</div>
+                            <h3 style="color: #10B981;">Download Started!</h3>
+                            <p>${messages[quality]}</p>
+                            <p style="font-size: 14px; color: #666; margin-top: 10px;">(In a real implementation, this would download the actual file)</p>
+                            <button class="demo-download-btn" style="margin-top: 15px; max-width: 200px;" id="back-btn">Back to Options</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('back-btn').addEventListener('click', function() {
+                    resultDiv.innerHTML = originalContent;
+                    // Reattach event listeners to the buttons
+                    document.querySelectorAll('.demo-download-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const quality = this.getAttribute('data-quality');
+                            showDownloadMessage(quality, username, videoId);
+                        });
+                    });
+                });
+            }
+
+            function showError(message) {
+                resultDiv.innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; border: 1px solid #f5c6cb;">
+                        <strong>Error:</strong> ${message}
+                    </div>
+                `;
+            }
+
+            // Allow Enter key to trigger download
+            urlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    downloadBtn.click();
+                }
             });
         });
     </script>
